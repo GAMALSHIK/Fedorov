@@ -1,0 +1,33 @@
+﻿<Window x:Class="Plateshi.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Plateshi"
+        mc:Ignorable="d"
+        Title="Login" Height="170" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.6*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="Имя пользователя" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+                    <TextBlock Text="Пароль" Margin="0,20,10,0" HorizontalAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                <TextBox x:Name="login_TextBox" Text="alampiev_ab_aga" Height="30" Margin="0,0,20,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="password_Password" Password="alampiev_ab_aga" Height="30" Margin="0,10,20,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="login_Button" Content="Войти" Height="30" Width="70" Margin="0,0,10,0" Click="login_Button_Click"/>
+            <Button x:Name="exit_Button" Content="Выход" Height="30" Width="70" Margin="0,0,20,0" Click="exit_Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

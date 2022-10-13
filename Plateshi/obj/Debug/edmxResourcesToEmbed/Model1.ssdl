@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище up_11_02Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="pk_category_id" />
+    </Key>
+    <Property Name="pk_category_id" Type="bigint" Nullable="false" />
+    <Property Name="category_name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="pf_product_id" />
+    </Key>
+    <Property Name="pf_product_id" Type="bigint" Nullable="false" />
+    <Property Name="product_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="fk_category_id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products_users_table">
+    <Key>
+      <PropertyRef Name="pk_product_with_user_id" />
+    </Key>
+    <Property Name="pk_product_with_user_id" Type="bigint" Nullable="false" />
+    <Property Name="fk_product_id" Type="bigint" Nullable="false" />
+    <Property Name="fk_user_id" Type="bigint" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="count" Type="bigint" Nullable="false" />
+    <Property Name="sum" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="pk_user_id" />
+    </Key>
+    <Property Name="pk_user_id" Type="bigint" Nullable="false" />
+    <Property Name="family_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="first_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="patronymic" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_products_categories">
+    <End Role="categories" Type="Self.categories" Multiplicity="1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="pk_category_id" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="fk_category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_users_table_products">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="products_users_table" Type="Self.products_users_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="pf_product_id" />
+      </Principal>
+      <Dependent Role="products_users_table">
+        <PropertyRef Name="fk_product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_products_users_table_users">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="products_users_table" Type="Self.products_users_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="pk_user_id" />
+      </Principal>
+      <Dependent Role="products_users_table">
+        <PropertyRef Name="fk_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище up_11_02ModelContainer">
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products_users_table" EntityType="Self.products_users_table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_products_categories" Association="Self.FK_products_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_users_table_products" Association="Self.FK_products_users_table_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="products_users_table" EntitySet="products_users_table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_products_users_table_users" Association="Self.FK_products_users_table_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="products_users_table" EntitySet="products_users_table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
