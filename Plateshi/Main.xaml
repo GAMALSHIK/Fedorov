@@ -21,9 +21,15 @@
             <TextBlock Text="по" Margin="10,0,0,0" FontSize="15" VerticalAlignment="Center"/>
             <DatePicker Text="31.12.2022" BorderThickness="2" Height="30" Width="100" Margin="20,0,0,0" VerticalAlignment="Center"/>
             <TextBlock Text="Категория:" Margin="40,0,0,0" FontSize="15" VerticalAlignment="Center"/>
-            <ComboBox Text="31.12.2022" BorderThickness="2" Height="30" Width="100" Margin="20,0,0,0" VerticalAlignment="Center"/>
-            <Button Content="Выбрать" Height="30" Width="80" Margin="20,0,0,0" FontSize="15"/>
-            <Button Content="Очистить" Height="30" Width="80" Margin="20,0,0,0" FontSize="15"/>
+            <ComboBox x:Name="category_ComboBox" Text="" BorderThickness="2" Height="30" Width="100" Margin="20,0,0,0" VerticalAlignment="Center">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding category_name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button x:Name="setCategory_Button" Content="Выбрать" Height="30" Width="80" Margin="20,0,0,0" FontSize="15" Click="setCategory_Button_Click"/>
+            <Button x:Name="clearCategory_Button" Content="Очистить" Height="30" Width="80" Margin="20,0,0,0" FontSize="15" Click="clearCategory_Button_Click"/>
             <Button x:Name="otchet_Button" Content="Отчет" Height="30" Width="80" Margin="20,0,0,0" FontSize="15" Click="otchet_Button_Click"/>
             
         </StackPanel>
@@ -46,7 +52,7 @@
                             <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding count}"/>
                             <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding price}" />
                             <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding sum}" />
-                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding categories.category_name}"/>
+                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding product.category_name}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

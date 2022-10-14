@@ -19,19 +19,26 @@ namespace Plateshi
     /// </summary>
     public partial class DeleteData : Window
     {
-        ListView listView;
-        public DeleteData(ListView newListView)
+        Main main;
+        public DeleteData(Main newMainWindow)
         {
             InitializeComponent();
-            listView = newListView;
+            main = newMainWindow;
         }
 
         private void delete_Button_Click(object sender, RoutedEventArgs e)
         {
-            var removedData = listView.SelectedItems.Cast<products_users_table>().ToList();
+            var removedData = main.spisok_ListView.SelectedItems.Cast<products_users_table>().ToList();
             Instances.db.products_users_table.RemoveRange(removedData);
             Instances.db.SaveChanges();
             Instances.db.ChangeTracker.Entries().ToList().ForEach(q => q.Reload());
+
+
+            //Refresh Visual and LogFile
+            //main.spisok_ListView.ItemsSource = Instances.db.products_users_table.Where(q => q.fk_user_id == main.User.pk_user_id).Take(100).ToList();
+            main.RefreshListView();
+            main.DeletedCount = removedData.Count;
+
             this.Close();
         }
     }
