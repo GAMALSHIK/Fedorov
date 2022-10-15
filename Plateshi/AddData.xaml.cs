@@ -23,5 +23,10 @@ namespace Plateshi
         {
             InitializeComponent();
         }
+
+        private void close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
